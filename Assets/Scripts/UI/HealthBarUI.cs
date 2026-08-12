@@ -30,4 +30,4 @@ public class HealthBarUI : MonoBehaviour
 		slider.maxValue = max;
 		slider.value = current;
 	}
-}a
+}
