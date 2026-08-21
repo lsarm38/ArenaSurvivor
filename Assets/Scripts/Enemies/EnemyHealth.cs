@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 30f;
+    [SerializeField] private GameObject xpOrbPrefab;
 
     public float CurrentHealth { get; private set; }
     public bool IsDead => CurrentHealth <= 0f;
@@ -24,6 +25,11 @@ public class EnemyHealth : MonoBehaviour
 
         if (IsDead)
         {
+            if (xpOrbPrefab != null)
+            {
+                Instantiate(xpOrbPrefab, transform.position, Quaternion.identity);
+            }
+
             OnDeath?.Invoke(this);
         }
     }
