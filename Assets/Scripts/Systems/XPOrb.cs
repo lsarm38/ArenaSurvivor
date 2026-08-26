@@ -6,27 +6,31 @@ public class XPOrb : MonoBehaviour
     [SerializeField] private int xpValue = 1;
 
     [Header("Magnet Behavior")]
-    [SerializeField] private float attractRadius = 3f;
     [SerializeField] private float attractSpeed = 10f;
 
     private Transform player;
+    private PlayerXP playerXP;
 
     private void OnEnable()
     {
         // Pooled objects get re-enabled rather than re-instantiated, so we
         // re-find the player reference each time this orb becomes active
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        player = playerObj?.transform;
+        playerXP = playerObj?.GetComponent<PlayerXP>();
     }
 
     private void Update()
     {
-        if (player == null) return;
+        if (player == null || playerXP == null) return;
 
         float distance = Vector2.Distance(transform.position, player.position);
 
-        // Only move toward the player once within attractRadius — otherwise
-        // orbs stay put until the player gets close, like the genre standard
-        if (distance <= attractRadius)
+        // Only move toward the player once within PickupRadius — otherwise
+        // orbs stay put until the player gets close, like the genre standard.
+        // Reading this from PlayerXP (instead of a local field) is what lets
+        // the PickupRadius upgrade affect every orb in the scene at once.
+        if (distance <= playerXP.PickupRadius)
         {
             transform.position = Vector2.MoveTowards(
                 transform.position,
@@ -38,9 +42,9 @@ public class XPOrb : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.TryGetComponent<PlayerXP>(out var playerXP)) return;
+        if (!other.TryGetComponent<PlayerXP>(out var hitPlayerXP)) return;
 
-        playerXP.AddXP(xpValue);
+        hitPlayerXP.AddXP(xpValue);
         Destroy(gameObject);
     }
 }

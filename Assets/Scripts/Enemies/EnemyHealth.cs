@@ -27,7 +27,7 @@ public class EnemyHealth : MonoBehaviour
         {
             if (xpOrbPrefab != null)
             {
-                Instantiate(xpOrbPrefab, transform.position, Quaternion.identity);
+                GameObject orb = Instantiate(xpOrbPrefab, transform.position, Quaternion.identity);
             }
 
             OnDeath?.Invoke(this);

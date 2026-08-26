@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2777215940135458519}
   - component: {fileID: 1126326731046961729}
   - component: {fileID: 3662761968919733049}
+  - component: {fileID: -2727498364684316809}
   m_Layer: 0
   m_Name: XPOrb
   m_TagString: Untagged
@@ -145,3 +146,30 @@ MonoBehaviour:
   xpValue: 1
   attractRadius: 3
   attractSpeed: 10
+--- !u!50 &-2727498364684316809
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4122139405266153994}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

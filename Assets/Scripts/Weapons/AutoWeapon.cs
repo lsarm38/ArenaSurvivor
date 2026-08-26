@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AutoWeapon : MonoBehaviour
@@ -12,6 +14,22 @@ public class AutoWeapon : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer; // set this to whatever layer you put enemies on
 
     private float fireCooldown;
+    private int extraProjectiles; // 0 = single shot, 1 = double shot, etc.
+
+    public void IncreaseDamage(float amount)
+    {
+        damage += amount;
+    }
+
+    public void IncreaseFireRate(float amount)
+    {
+        fireRate += amount;
+    }
+
+    public void IncreaseProjectileCount(int amount)
+    {
+        extraProjectiles += amount;
+    }
 
     private void Update()
     {
@@ -26,33 +44,28 @@ public class AutoWeapon : MonoBehaviour
 
     private void TryFire()
     {
-        Transform target = FindNearestEnemy();
-        if (target == null) return; // no enemies in range, nothing to shoot at
+        // Fire at (1 + extraProjectiles) separate nearest enemies each shot,
+        // so "double shot" hits two different targets instead of stacking on one
+        List<Transform> targets = FindNearestEnemies(1 + extraProjectiles);
+        if (targets.Count == 0) return; // no enemies in range, nothing to shoot at
 
-        GameObject projectileObj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        Vector2 direction = (target.position - transform.position).normalized;
-        projectileObj.GetComponent<Projectile>().Launch(direction, damage);
+        foreach (Transform target in targets)
+        {
+            GameObject projectileObj = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            Vector2 direction = (target.position - transform.position).normalized;
+            projectileObj.GetComponent<Projectile>().Launch(direction, damage);
+        }
     }
 
-    private Transform FindNearestEnemy()
+    private List<Transform> FindNearestEnemies(int count)
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, range, enemyLayer);
-        if (hits.Length == 0) return null;
 
-        Transform nearest = null;
-        float nearestDistSqr = float.MaxValue;
-
-        foreach (var hit in hits)
-        {
-            float distSqr = (hit.transform.position - transform.position).sqrMagnitude;
-            if (distSqr < nearestDistSqr)
-            {
-                nearestDistSqr = distSqr;
-                nearest = hit.transform;
-            }
-        }
-
-        return nearest;
+        return hits
+            .OrderBy(hit => (hit.transform.position - transform.position).sqrMagnitude)
+            .Take(count)
+            .Select(hit => hit.transform)
+            .ToList();
     }
 
     // Visualize weapon range in the Editor without needing Play mode

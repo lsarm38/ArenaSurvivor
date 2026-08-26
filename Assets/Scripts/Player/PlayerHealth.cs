@@ -28,6 +28,7 @@ public class PlayerHealth : MonoBehaviour
 
         CurrentHealth = Mathf.Max(0f, CurrentHealth - amount);
         OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
+        Debug.Log($"Player took {amount} damage. HP: {CurrentHealth}/{maxHealth}");
 
         if (IsDead)
         {
@@ -39,6 +40,13 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(float amount)
     {
         CurrentHealth = Mathf.Min(maxHealth, CurrentHealth + amount);
+        OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
+    }
+
+    public void IncreaseMaxHealth(float amount)
+    {
+        maxHealth += amount;
+        CurrentHealth += amount; // also heal by the increase, so it feels like a real upgrade, not just a higher ceiling
         OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
     }
 }
