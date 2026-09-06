@@ -7,6 +7,7 @@ public class UpgradeManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private PlayerXP playerXP;
     [SerializeField] private AutoWeapon autoWeapon;
+    [SerializeField] private OrbitingWeapon orbitingWeapon;
     [SerializeField] private PlayerController playerController;
     [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private UpgradeChoiceUI choiceUI;
@@ -90,6 +91,12 @@ public class UpgradeManager : MonoBehaviour
                 break;
             case UpgradeType.ProjectileCount:
                 autoWeapon.IncreaseProjectileCount(Mathf.RoundToInt(upgrade.amount));
+                break;
+            case UpgradeType.OrbitDamage:
+                orbitingWeapon.IncreaseDamage(upgrade.amount);
+                break;
+            case UpgradeType.OrbitCount:
+                orbitingWeapon.IncreaseOrbitCount(Mathf.RoundToInt(upgrade.amount));
                 break;
         }
     }

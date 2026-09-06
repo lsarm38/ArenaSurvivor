@@ -8,7 +8,9 @@ public enum UpgradeType
     MaxHealth,
     PickupRadius,   // increases how close an XP orb needs to be before it magnets toward the player
     InstantHeal,    // one-time heal, doesn't raise max HP
-    ProjectileCount // fires additional simultaneous projectiles at extra nearby enemies ("double/triple shot")
+    ProjectileCount, // fires additional simultaneous projectiles at extra nearby enemies ("double/triple shot")
+    OrbitDamage,    // increases damage dealt by the orbiting weapon
+    OrbitCount      // adds another orbiting object
 }
 
 // CreateAssetMenu adds a right-click > Create option in the Project window,

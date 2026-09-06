@@ -1160,6 +1160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeManager
   playerXP: {fileID: 1250644128}
   autoWeapon: {fileID: 1250644127}
+  orbitingWeapon: {fileID: 1250644129}
   playerController: {fileID: 1250644125}
   playerHealth: {fileID: 1250644126}
   choiceUI: {fileID: 396528448}
@@ -1171,6 +1172,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e668867cfedfa4d4a94617be95cdafbf, type: 2}
   - {fileID: 11400000, guid: fc85b56b668b30b49b5b538ffcfdfcfa, type: 2}
   - {fileID: 11400000, guid: b41eebe7197196343a769489134c6894, type: 2}
+  - {fileID: 11400000, guid: 2d227ee4359681d468ab1f80a82a0c4b, type: 2}
+  - {fileID: 11400000, guid: 1f719d83f7d52874cb5edbb5b310e884, type: 2}
   picksPerLevelUp: 2
 --- !u!4 &683059706
 Transform:
@@ -1753,6 +1756,7 @@ GameObject:
   - component: {fileID: 1250644126}
   - component: {fileID: 1250644127}
   - component: {fileID: 1250644128}
+  - component: {fileID: 1250644129}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1969,6 +1973,23 @@ MonoBehaviour:
   baseXPToLevel: 10
   xpCurveMultiplier: 1.3
   basePickupRadius: 3
+--- !u!114 &1250644129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250644120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9de3fe264a42e64ea921f5417a44403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OrbitingWeapon
+  orbitObjectPrefab: {fileID: 1425809272537174048, guid: 2fd3b884f5bd094488942a63574a14fa, type: 3}
+  orbitRadius: 2
+  orbitSpeed: 90
+  damage: 8
+  orbitCount: 1
 --- !u!1 &1270285688
 GameObject:
   m_ObjectHideFlags: 0
