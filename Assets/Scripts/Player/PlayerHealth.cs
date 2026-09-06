@@ -11,6 +11,13 @@ public class PlayerHealth : MonoBehaviour
     // UI (or anything else) subscribes to this instead of checking CurrentHealth every frame
     public event System.Action<float, float> OnHealthChanged; // (current, max)
 
+    // Separate from OnHealthChanged since screen shake (and similar "ouch" feedback)
+    // should only fire on actual damage, not on healing or max-health increases
+    public event System.Action OnDamaged;
+
+    // Fired exactly once, the moment health first hits 0
+    public event System.Action OnDeath;
+
     private void Awake()
     {
         CurrentHealth = maxHealth;
@@ -28,12 +35,11 @@ public class PlayerHealth : MonoBehaviour
 
         CurrentHealth = Mathf.Max(0f, CurrentHealth - amount);
         OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
-        Debug.Log($"Player took {amount} damage. HP: {CurrentHealth}/{maxHealth}");
+        OnDamaged?.Invoke();
 
         if (IsDead)
         {
-            Debug.Log("Player died.");
-            // We'll hook this into a proper Game Over screen in Week 5
+            OnDeath?.Invoke();
         }
     }
 
