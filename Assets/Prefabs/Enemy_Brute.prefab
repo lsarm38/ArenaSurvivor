@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7183346290503237074}
   - component: {fileID: 3201056851562842661}
   m_Layer: 3
-  m_Name: Enemy
+  m_Name: Enemy_Brute
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.00503, y: -0.37546, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.5450981, g: 0, b: 0.5450981, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -181,9 +181,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 473df4ba870a6aa4cb475c70e319ec5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyChase
-  moveSpeed: 2.5
+  moveSpeed: 1.2
   target: {fileID: 0}
-  contactDamage: 10
+  contactDamage: 20
   damageCooldown: 1
 --- !u!114 &3201056851562842661
 MonoBehaviour:
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92848db8b03f325438205876ec511235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  maxHealth: 30
+  maxHealth: 80
   xpOrbPrefab: {fileID: 4122139405266153994, guid: 08f4c977ed8307a4dac520ba918ecdf2, type: 3}
   deathParticlesPrefab: {fileID: 4597089272637773889, guid: 13a69c2d6b6118b45abe4a48b6d3d4de, type: 3}
   flashColor: {r: 1, g: 1, b: 1, a: 1}

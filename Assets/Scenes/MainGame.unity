@@ -1103,11 +1103,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 037f548de80669641aedc773d31da82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  enemyPrefab: {fileID: 3201056851562842661, guid: 3911cddc411cbfd419d2cff1b925af67, type: 3}
+  enemyPrefabs:
+  - {fileID: 3201056851562842661, guid: 3911cddc411cbfd419d2cff1b925af67, type: 3}
+  - {fileID: 3201056851562842661, guid: 59a1a207453893243a63c645551fe459, type: 3}
+  - {fileID: 3201056851562842661, guid: a28a34997c7a4974085781b7a287bd54, type: 3}
   player: {fileID: 1250644124}
   spawnInterval: 2
   spawnRadius: 10
-  prewarmCount: 20
+  prewarmCountPerType: 10
   rampInterval: 15
   rampMultiplier: 0.9
   minSpawnInterval: 0.3

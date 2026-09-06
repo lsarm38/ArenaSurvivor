@@ -6,6 +6,7 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 30f;
     [SerializeField] private GameObject xpOrbPrefab;
+    [SerializeField] private GameObject deathParticlesPrefab;
 
     [Header("Hit Flash")]
     [SerializeField] private Color flashColor = Color.white;
@@ -50,6 +51,20 @@ public class EnemyHealth : MonoBehaviour
             if (xpOrbPrefab != null)
             {
                 Instantiate(xpOrbPrefab, transform.position, Quaternion.identity);
+            }
+
+            if (deathParticlesPrefab != null)
+            {
+                GameObject particles = Instantiate(deathParticlesPrefab, transform.position, Quaternion.identity);
+
+                // Tint the burst to match THIS enemy's color, so one shared
+                // particle prefab works correctly for Runner, Brute, etc.
+                // instead of every enemy type spawning the same fixed color
+                if (particles.TryGetComponent<ParticleSystem>(out var particleSystem))
+                {
+                    ParticleSystem.MainModule main = particleSystem.main;
+                    main.startColor = originalColor;
+                }
             }
 
             OnDeath?.Invoke(this);
